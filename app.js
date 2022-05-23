@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 const path = require("path");
 const newsRoute = require("./routes/newsRoute");
@@ -16,6 +16,7 @@ db.once("open", () => {
   console.log("Banco carregado");
 });
 
+app.use(express.static(path.join(__dirname, 'views')))
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use("/", newsRoute);
