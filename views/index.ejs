@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Notícias</title>
+</head>
+<body class="bg-light">
+    
+    <%- include('partials/header-index')%>
+
+    <main class="container">
+        <%for(let i = 0; i < news.length; i++){%>
+            <form class="card p-3 mx-auto mt-2 w-100 bg-white" method="POST" action="/?_method=DELETE">
+                <h1 class="text-dark"><%=news[i].title%></h1>
+                <div class="w-100 text-center mx-auto">
+                    <img class="rounded mb-3 img-fluid" src="/files/<%=news[i].file%>">
+                </div>
+                <p class="fs-6 text-dark"><%=news[i].txt%></p>
+                <input name="id" value="<%=news[i].id%>" hidden>                
+                <%if(sessionLogin && user.permission === "admin"){%>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a class="btn btn-info" href="/edit/<%=news[i]._id%>">Editar</a>
+                        <button class="btn btn-danger" type="submit">Excluir</button>
+                    </div>
+                <%}%>
+            </form>
+        <%}%>
+    </main>
+
+    <%- include('partials/footer')%>
+
+</body>
+</html>
