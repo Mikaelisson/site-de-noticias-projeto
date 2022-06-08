@@ -13,7 +13,7 @@ const all = async ( req, res ) => {
     let sessionLogin = req.session.login;
     let user = await User.findOne({ email: sessionLogin });
 
-    res.render('index', { news, sessionLogin, user });
+    res.render("index.ejs", { news, sessionLogin, user });
   } catch (error) {
     res.send(error);
   }

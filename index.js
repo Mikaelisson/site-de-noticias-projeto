@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const path = require("path");
 const newsRoute = require("./routes/newsRoute");
 
-mongoose.connect("mongodb+srv://Mikaelisson:011020@cluster0.twdqh.mongodb.net/news?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://mikaelisson:draco2036@cluster0.twdqh.mongodb.net/news?retryWrites=true&w=majority");
+
 
 let db = mongoose.connection;
 
@@ -16,9 +17,8 @@ db.once("open", () => {
   console.log("Banco carregado");
 });
 
-app.use(express.static(path.join(__dirname, 'views')))
-app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 app.use("/", newsRoute);
 app.use("/files", express.static(path.resolve(__dirname, "tmp", "uploads")));
 
